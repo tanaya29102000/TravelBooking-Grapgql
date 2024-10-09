@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./ViewBookings.css"; // Import the CSS file
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './ViewBookings.css'; // Import the CSS file
 
 const ViewBookings = () => {
   const [bookings, setBookings] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get(
-          "https://travel-booking-grapgql-ikuv.vercel.app/bookings"
-        );
+        const response = await axios.get('https://travel-booking-grapgql-ikuv.vercel.app/bookings');
         if (response.status !== 200) {
-          throw new Error("Error fetching bookings!");
+          throw new Error('Error fetching bookings!');
         }
         setBookings(response.data);
       } catch (err) {
         console.error(err);
-        setError("Error fetching bookings! Please try again.");
+        setError('Error fetching bookings! Please try again.');
       } finally {
         setLoading(false);
       }
@@ -30,12 +29,10 @@ const ViewBookings = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `https://travel-booking-grapgql-ikuv.vercel.app/bookings/${id}`
-      );
-      setBookings(bookings.filter((booking) => booking._id !== id)); // Update state to remove deleted booking
+      await axios.delete(`https://travel-booking-grapgql-ikuv.vercel.app/bookings/${id}`);
+      setBookings(bookings.filter(booking => booking._id !== id)); // Update state to remove deleted booking
     } catch (error) {
-      console.error("Error deleting booking:", error);
+      console.error('Error deleting booking:', error);
     }
   };
 
@@ -91,17 +88,10 @@ const ViewBookings = () => {
               <td>{booking.additionalInfo}</td>
               <td>
                 {/* Delete Icon */}
-                <span
-                  className="delete-icon"
-                  onClick={() => handleDelete(booking._id)}
-                >
-                  <img src="delete.png" alt="delete image" />{" "}
+                <span className="delete-icon" onClick={() => handleDelete(booking._id)}>
+                  🗑️ {/* You can replace this with an SVG or Font Awesome icon */}
                 </span>
-                <a href={`/bookings/${booking._id}`}>
-                  {" "}
-                  <img src="download.png" alt="eye img" />
-                  View
-                </a>
+                <a href={`/bookings/${booking._id}`}> View</a>
               </td>
             </tr>
           ))}
