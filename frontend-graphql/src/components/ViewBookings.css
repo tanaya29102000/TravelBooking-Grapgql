@@ -34,7 +34,7 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-  background-color: #e0e0e0; /* Change background on row hover */
+  background-color: #e0e0e0; 
 }
 
 .error {

@@ -8,7 +8,9 @@
 
 .image-container img {
   width: 400px;
-  height: auto;
+  height: 400px;
+  margin-bottom: 200px;
+
 }
 
 .form-container {

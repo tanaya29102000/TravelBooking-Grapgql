@@ -1,4 +1,3 @@
-// resolvers/resolvers.js
 const Booking = require('../models/Booking');
 
 const resolvers = {

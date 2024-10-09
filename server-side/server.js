@@ -1,22 +1,17 @@
-
-
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-// MongoDB URI
 const MONGO_URI = 'mongodb+srv://tanayakanerkar:tanu1@cluster1.2vb33.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
 
-// Connect to MongoDB
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => console.log("MongoDB connected"))
+}).then(() => console.log("MongoDB connected Successfully!!"))
   .catch(err => console.log("MongoDB connection error:", err));
 
-// Define Booking schema for MongoDB
 const bookingSchema = new mongoose.Schema({
   title: String,
   firstName: String,
@@ -35,10 +30,8 @@ const bookingSchema = new mongoose.Schema({
   additionalInfo: String
 });
 
-// Create Booking model
 const Booking = mongoose.model('Booking', bookingSchema);
 
-// Define GraphQL schema
 const schema = buildSchema(`
   type Booking {
     id: ID!
