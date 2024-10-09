@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ViewBookings.css'; // Import the CSS file
@@ -11,7 +10,7 @@ const ViewBookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get('https://travel-booking-grapgql-4hh7.vercel.app/bookings');
+        const response = await axios.get('http://localhost:5000/bookings');
         if (response.status !== 200) {
           throw new Error('Error fetching bookings!');
         }
@@ -29,7 +28,7 @@ const ViewBookings = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://travel-booking-grapgql-4hh7.vercel.app/bookings/${id}`);
+      await axios.delete(`http://localhost:5000/bookings/${id}`);
       setBookings(bookings.filter(booking => booking._id !== id)); // Update state to remove deleted booking
     } catch (error) {
       console.error('Error deleting booking:', error);
@@ -91,7 +90,7 @@ const ViewBookings = () => {
                 <span className="delete-icon" onClick={() => handleDelete(booking._id)}>
                   🗑️ {/* You can replace this with an SVG or Font Awesome icon */}
                 </span>
-                <a href={`/bookings/${booking._id}`}></a>
+                <a href={`/bookings/${booking._id}`}> View</a>
               </td>
             </tr>
           ))}

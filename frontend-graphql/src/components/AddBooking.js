@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import axios from "axios";
-import Swal from "sweetalert2"; 
-import "./AddBooking.css";
+import React, { useState } from 'react';
+import axios from 'axios';
+import Swal from 'sweetalert2'; // SweetAlert2 for alert popups
+import './AddBooking.css'; // Ensure CSS file for styling
 
 const AddBooking = () => {
   const [formData, setFormData] = useState({
-    title: "",
-    firstName: "",
-    lastName: "",
-    birthDate: "",
-    organizationName: "",
-    email: "",
-    phoneNumber: "",
-    departureCountry: "",
-    destinationCountry: "",
-    departureDate: "",
-    returnDate: "",
-    classOfService: "",
-    preferredHotel: "",
-    preferredAirline: "",
-    additionalInfo: "",
+    title: '',
+    firstName: '',
+    lastName: '',
+    birthDate: '',
+    organizationName: '',
+    email: '',
+    phoneNumber: '',
+    departureCountry: '',
+    destinationCountry: '',
+    departureDate: '',
+    returnDate: '',
+    classOfService: '',
+    preferredHotel: '',
+    preferredAirline: '',
+    additionalInfo: ''
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,8 +32,9 @@ const AddBooking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError('');
 
+    // Toggle between GraphQL and REST API usage
     const useGraphQL = true;
 
     try {
@@ -64,59 +65,53 @@ const AddBooking = () => {
           }
         `;
 
-        const response = await axios.post(
-          "https://travel-booking-grapgql-4hh7.vercel.app/graphql",
-          { query: mutation }
-        );
+        const response = await axios.post('http://localhost:5000/graphql', { query: mutation });
         if (response.data.errors) {
           throw new Error(response.data.errors[0].message);
         }
 
         await Swal.fire({
-          icon: "success",
-          title: "Booking Added",
-          text: "Your booking was added successfully!",
+          icon: 'success',
+          title: 'Booking Added',
+          text: 'Your booking was added successfully!',
         });
       } else {
-        const response = await axios.post(
-          "https://travel-booking-grapgql-4hh7.vercel.app/api/bookings",
-          formData
-        );
+        const response = await axios.post('http://localhost:5000/api/bookings', formData);
         if (response.status !== 201) {
-          throw new Error("Failed to add booking.");
+          throw new Error('Failed to add booking.');
         }
 
         await Swal.fire({
-          icon: "success",
-          title: "Booking Added",
-          text: "Booking added successfully via REST API!",
+          icon: 'success',
+          title: 'Booking Added',
+          text: 'Booking added successfully via REST API!',
         });
       }
 
       setFormData({
-        title: "",
-        firstName: "",
-        lastName: "",
-        birthDate: "",
-        organizationName: "",
-        email: "",
-        phoneNumber: "",
-        departureCountry: "",
-        destinationCountry: "",
-        departureDate: "",
-        returnDate: "",
-        classOfService: "",
-        preferredHotel: "",
-        preferredAirline: "",
-        additionalInfo: "",
+        title: '',
+        firstName: '',
+        lastName: '',
+        birthDate: '',
+        organizationName: '',
+        email: '',
+        phoneNumber: '',
+        departureCountry: '',
+        destinationCountry: '',
+        departureDate: '',
+        returnDate: '',
+        classOfService: '',
+        preferredHotel: '',
+        preferredAirline: '',
+        additionalInfo: ''
       });
     } catch (err) {
       console.error(err);
-      setError("Error adding booking! Please try again.");
+      setError('Error adding booking! Please try again.');
       await Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "Failed to add the booking. Please try again.",
+        icon: 'error',
+        title: 'Error!',
+        text: 'Failed to add the booking. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -133,16 +128,11 @@ const AddBooking = () => {
         <h2>Travel Information Form</h2>
         {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit}>
+          {/* Form fields */}
           <div className="form-row">
             <div className="form-column">
               <label htmlFor="title">Title:</label>
-              <select
-                name="title"
-                id="title"
-                onChange={handleChange}
-                value={formData.title}
-                required
-              >
+              <select name="title" id="title" onChange={handleChange} value={formData.title} required>
                 <option value="">Please Select</option>
                 <option value="Mr">Mr</option>
                 <option value="Ms">Ms</option>
@@ -164,6 +154,7 @@ const AddBooking = () => {
             </div>
           </div>
 
+          {/* More fields */}
           <div className="form-row">
             <div className="form-column">
               <label htmlFor="lastName">Last Name:</label>
@@ -291,13 +282,7 @@ const AddBooking = () => {
           <div className="form-row">
             <div className="form-column">
               <label htmlFor="classOfService">Class of Service:</label>
-              <select
-                name="classOfService"
-                id="classOfService"
-                onChange={handleChange}
-                value={formData.classOfService}
-                required
-              >
+              <select name="classOfService" id="classOfService" onChange={handleChange} value={formData.classOfService} required>
                 <option value="">Please Select</option>
                 <option value="Economy">Economy</option>
                 <option value="Business">Business</option>
@@ -345,7 +330,7 @@ const AddBooking = () => {
 
           <div className="button-container">
             <button type="submit" className="submit-button" disabled={loading}>
-              {loading ? "Submitting..." : "Submit"}
+              {loading ? 'Submitting...' : 'Submit'}
             </button>
           </div>
         </form>
