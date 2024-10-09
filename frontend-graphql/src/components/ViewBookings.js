@@ -89,9 +89,9 @@ const ViewBookings = () => {
               <td>
                 {/* Delete Icon */}
                 <span className="delete-icon" onClick={() => handleDelete(booking._id)}>
-                  🗑️ {/* You can replace this with an SVG or Font Awesome icon */}
+                  🗑️ 
                 </span>
-                <a href={`/bookings/${booking._id}`}> View</a>
+                <a href={`/bookings/${booking._id}`}></a>
               </td>
             </tr>
           ))}
