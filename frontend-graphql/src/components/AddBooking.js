@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Swal from "sweetalert2"; // SweetAlert2 for alert popups
-import "./AddBooking.css"; // Ensure CSS file for styling
+import Swal from "sweetalert2"; 
+import "./AddBooking.css";
 
 const AddBooking = () => {
   const [formData, setFormData] = useState({
