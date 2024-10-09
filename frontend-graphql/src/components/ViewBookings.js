@@ -11,7 +11,7 @@ const ViewBookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/bookings');
+        const response = await axios.get('https://travel-booking-grapgql-ikuv.vercel.app/bookings');
         if (response.status !== 200) {
           throw new Error('Error fetching bookings!');
         }
@@ -29,7 +29,7 @@ const ViewBookings = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/bookings/${id}`);
+      await axios.delete(`https://travel-booking-grapgql-ikuv.vercel.app/bookings/${id}`);
       setBookings(bookings.filter(booking => booking._id !== id)); // Update state to remove deleted booking
     } catch (error) {
       console.error('Error deleting booking:', error);
