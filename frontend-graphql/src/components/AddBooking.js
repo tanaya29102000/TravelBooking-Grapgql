@@ -65,7 +65,7 @@ const AddBooking = () => {
         `;
 
         const response = await axios.post(
-          "https://travel-booking-grapgql-ikuv.vercel.app/graphql",
+          "https://travel-booking-grapgql-395u.vercel.app/graphql",
           { query: mutation }
         );
         if (response.data.errors) {
@@ -79,7 +79,7 @@ const AddBooking = () => {
         });
       } else {
         const response = await axios.post(
-          "https://travel-booking-grapgql-ikuv.vercel.app/api/bookings",
+          "https://travel-booking-grapgql-395u.vercel.app/api/bookings",
           formData
         );
         if (response.status !== 201) {
